@@ -1,0 +1,70 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import durmiendo from '../assets/malix/durmiendo.png';
+---
+
+<Base titulo="Página no encontrada">
+  <section class="page-shell not-found">
+    <div class="nf-art">
+      <Image src={durmiendo} alt="Malix dormido, enroscado." width={360} loading="eager" />
+    </div>
+    <div>
+      <p class="eyebrow">Error 404</p>
+      <h1>Shh… aquí no hay nada.</h1>
+      <p class="nf-lead">
+        Malix se quedó dormido buscando esta página. Mejor volvamos a un lugar conocido.
+      </p>
+      <a class="button button-primary" href="/">Volver al inicio</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .not-found {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    align-items: center;
+    gap: 60px;
+    min-height: calc(100svh - 200px);
+    padding: 60px 0 100px;
+  }
+
+  .nf-art {
+    width: min(380px, 100%);
+    aspect-ratio: 1;
+    overflow: hidden;
+    border: 3px solid var(--night);
+    border-radius: 50%;
+    box-shadow: 12px 12px 0 var(--lilac);
+  }
+
+  .nf-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .nf-lead {
+    max-width: 480px;
+    margin-bottom: 30px;
+    color: var(--night-76);
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 820px) {
+    .not-found {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .nf-art {
+      width: min(300px, 80%);
+      margin-inline: auto;
+    }
+
+    .nf-lead {
+      margin-inline: auto;
+    }
+  }
+</style>

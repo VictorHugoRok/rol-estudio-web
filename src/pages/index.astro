@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Marquee from '../components/Marquee.astro';
+import Services from '../components/Services.astro';
+import ProjectFeature from '../components/ProjectFeature.astro';
+import About from '../components/About.astro';
+import Contact from '../components/Contact.astro';
+import { getProyectos } from '../lib/proyectos';
+
+const proyectos = await getProyectos();
+---
+
+<Base>
+  <Hero />
+  <Marquee />
+
+  <section class="page-shell section projects" id="proyectos" aria-label="Nuestros proyectos">
+    {
+      proyectos.map((proyecto, i) => (
+        <ProjectFeature
+          proyecto={proyecto}
+          invertido={i % 2 === 1}
+          antetitulo={i === 0 ? 'Nuestro primer proyecto' : undefined}
+        />
+      ))
+    }
+  </section>
+
+  <Services />
+  <About />
+  <Contact />
+</Base>
+
+<style>
+  .projects {
+    display: grid;
+    gap: 130px;
+  }
+
+  @media (max-width: 540px) {
+    .projects {
+      gap: 90px;
+    }
+  }
+</style>

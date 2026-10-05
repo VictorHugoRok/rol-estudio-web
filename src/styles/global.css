@@ -1,0 +1,296 @@
+/* ==========================================================================
+   Rol Estudio — estilos globales
+   Paleta y tipografía según "Rol Estudio — Paleta y tipografía.pdf".
+   Los estilos de cada sección viven dentro de su componente (.astro).
+   ========================================================================== */
+
+:root {
+  /* Colores */
+  --cream: #fff8e6;
+  --night: #2c263f;
+  --sun: #f8c662;
+  --lilac: #595082;
+  --leaf: #41644a;
+  --forest: #213722;
+  --white: #ffffff;
+
+  /* Variantes */
+  --night-76: color-mix(in srgb, var(--night) 76%, transparent);
+  --night-18: rgb(44 38 63 / 18%);
+  --cream-75: rgb(255 248 230 / 75%);
+  --cream-35: rgb(255 248 230 / 35%);
+
+  /* Fuentes (las variables --font-schoolbell y --font-nunito las crea Astro) */
+  --font-display: var(--font-schoolbell), 'Comic Sans MS', cursive;
+  --font-body: var(--font-nunito), 'Trebuchet MS', 'Segoe UI', sans-serif;
+
+  /* Medidas */
+  --shell: 1160px;
+  --radius: 12px;
+  --shadow-hard: 4px 4px 0 var(--night);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 24px;
+}
+
+body {
+  margin: 0;
+  color: var(--night);
+  background: var(--cream);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* La franja animada está girada y sobresale un poco: esto evita el scroll horizontal. */
+main {
+  overflow-x: clip;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+/* Schoolbell solo tiene peso 400: sin esto el navegador inventa una negrita. */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+h1 {
+  margin-bottom: 26px;
+  font-size: clamp(3.4rem, 7vw, 6.4rem);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  margin-bottom: 24px;
+  font-size: clamp(2.6rem, 5vw, 4.4rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  margin-bottom: 10px;
+  font-size: clamp(1.7rem, 2.6vw, 2.1rem);
+  line-height: 1.05;
+}
+
+:focus-visible {
+  outline: 3px solid var(--lilac);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Utilidades de maquetación ---------- */
+
+.page-shell {
+  width: min(var(--shell), calc(100% - 40px));
+  margin-inline: auto;
+}
+
+.section {
+  padding: 130px 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  z-index: 100;
+  padding: 10px 16px;
+  border: 2px solid var(--night);
+  border-radius: var(--radius);
+  background: var(--sun);
+  font-weight: 900;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Piezas reutilizables ---------- */
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 22px;
+  color: var(--leaf);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 26px;
+  height: 5px;
+  border-radius: 4px;
+  background: var(--sun);
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 22px;
+  border: 2px solid var(--night);
+  border-radius: var(--radius);
+  background: var(--cream);
+  box-shadow: var(--shadow-hard);
+  font-weight: 900;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.button:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 var(--night);
+}
+
+.button-primary {
+  color: var(--cream);
+  background: var(--forest);
+}
+
+.button-sun {
+  background: var(--sun);
+}
+
+.button-night {
+  color: var(--cream);
+  background: var(--night);
+}
+
+.text-link {
+  display: inline-block;
+  padding: 10px 2px;
+  color: var(--lilac);
+  font-weight: 900;
+}
+
+.text-link::after {
+  content: '→';
+  margin-left: 6px;
+}
+
+.text-link-back {
+  display: flex;
+  width: fit-content;
+}
+
+.text-link-back::after {
+  content: none;
+}
+
+.text-link-back::before {
+  content: '←';
+  margin-right: 6px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 10px 16px;
+  border: 2px solid var(--night);
+  border-radius: 999px;
+  background: var(--sun);
+  box-shadow: var(--shadow-hard);
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.feature-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 0 0 36px;
+  padding: 0;
+  list-style: none;
+}
+
+.feature-list li {
+  padding: 13px 15px;
+  border: 2px solid var(--night);
+  border-radius: 10px;
+  background: var(--white);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.feature-list li::before {
+  content: '✦';
+  margin-right: 8px;
+  color: var(--leaf);
+}
+
+/* ---------- Responsivo ---------- */
+
+@media (max-width: 540px) {
+  .page-shell {
+    width: min(100% - 32px, var(--shell));
+  }
+
+  .section {
+    padding: 90px 0;
+  }
+
+  .feature-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Respeta a quien prefiere menos movimiento. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

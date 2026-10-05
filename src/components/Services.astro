@@ -1,0 +1,81 @@
+---
+import { servicios } from '../data/site';
+---
+
+<section class="page-shell section services" id="que-hacemos">
+  <div class="services-head">
+    <p class="eyebrow">Qué hacemos</p>
+    <h2>Jugar también es una forma de aprender.</h2>
+  </div>
+
+  <ul class="services-grid">
+    {
+      servicios.map((servicio, i) => (
+        <li class="service">
+          <span class="service-num" aria-hidden="true">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <h3>{servicio.titulo}</h3>
+          <p>{servicio.texto}</p>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .services-head {
+    max-width: 720px;
+    margin-bottom: 56px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .service {
+    padding: 30px 28px 26px;
+    border: 2px solid var(--night);
+    border-radius: 20px;
+    background: var(--white);
+    box-shadow: 6px 6px 0 var(--night);
+  }
+
+  .service:nth-child(2) {
+    box-shadow: 6px 6px 0 var(--lilac);
+  }
+
+  .service:nth-child(3) {
+    box-shadow: 6px 6px 0 var(--leaf);
+  }
+
+  .service-num {
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 18px;
+    border: 2px solid var(--night);
+    border-radius: 50%;
+    background: var(--sun);
+    font-size: 0.85rem;
+    font-weight: 900;
+  }
+
+  .service p {
+    margin: 0;
+    color: var(--night-76);
+  }
+
+  @media (max-width: 900px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+      max-width: 560px;
+    }
+  }
+</style>

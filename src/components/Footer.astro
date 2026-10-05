@@ -1,0 +1,79 @@
+---
+import { Image } from 'astro:assets';
+import { redes, site } from '../data/site';
+import icono from '../assets/malix/icono.png';
+
+const anio = new Date().getFullYear();
+---
+
+<footer class="page-shell footer">
+  <div class="footer-mark">
+    <Image src={icono} alt="" width={72} height={72} />
+    <span>© {anio} {site.nombre}</span>
+  </div>
+
+  {
+    redes.length > 0 && (
+      <ul class="footer-redes" aria-label="Redes sociales">
+        {redes.map((red) => (
+          <li>
+            <a href={red.url} target="_blank" rel="noopener noreferrer">
+              {red.nombre}
+            </a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  <span class="footer-note">{site.lema}</span>
+</footer>
+
+<style>
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 42px 0;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .footer-mark {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .footer-mark img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+  }
+
+  .footer-redes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .footer-redes a:hover {
+    color: var(--lilac);
+  }
+
+  .footer-note {
+    color: var(--lilac);
+  }
+
+  @media (max-width: 540px) {
+    .footer {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>

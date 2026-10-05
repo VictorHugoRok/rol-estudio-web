@@ -1,0 +1,253 @@
+---
+import { Image } from 'astro:assets';
+import { render, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { getProyectos } from '../../lib/proyectos';
+
+// Genera una página por cada proyecto de src/content/proyectos/
+export async function getStaticPaths() {
+  const proyectos = await getProyectos();
+  return proyectos.map((proyecto) => ({
+    params: { slug: proyecto.id },
+    props: { proyecto },
+  }));
+}
+
+interface Props {
+  proyecto: CollectionEntry<'proyectos'>;
+}
+
+const { proyecto } = Astro.props;
+const { data } = proyecto;
+const { Content } = await render(proyecto);
+---
+
+<Base titulo={data.nombre} descripcion={data.resumen} imagen={data.portada}>
+  <article>
+    <header class="page-shell detail-hero">
+      <div class="detail-copy">
+        <a class="text-link text-link-back" href="/proyectos/">Todos los proyectos</a>
+        <p class="eyebrow">{data.tipo}</p>
+        <h1>{data.nombre}</h1>
+        <p class="detail-tagline">{data.titular}</p>
+
+        <div class="access" aria-labelledby="acceso-titulo">
+          <h2 id="acceso-titulo" class="visually-hidden">Acceso</h2>
+          {
+            data.enlaces.length > 0 ? (
+              <div class="access-buttons">
+                {data.enlaces.map((enlace, i) => (
+                  <a
+                    class:list={['button', i === 0 ? 'button-primary' : 'button-sun']}
+                    href={enlace.url}
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    {enlace.texto}
+                  </a>
+                ))}
+              </div>
+            ) : (
+              <p class="access-soon">
+                <span class="tag">{data.estado}</span>
+                <span>
+                  Todavía no está disponible.{' '}
+                  <a class="inline-link" href="/#contacto">
+                    Escríbenos
+                  </a>{' '}
+                  y te avisamos cuando lo esté.
+                </span>
+              </p>
+            )
+          }
+        </div>
+      </div>
+
+      <div class="detail-visual">
+        <div class="detail-frame">
+          <Image src={data.portada} alt={data.portadaAlt} width={720} loading="eager" />
+        </div>
+      </div>
+    </header>
+
+    <section class="page-shell detail-body">
+      <div class="prose">
+        <Content />
+      </div>
+
+      {
+        data.caracteristicas.length > 0 && (
+          <ul class="feature-list" aria-label={`Características de ${data.nombre}`}>
+            {data.caracteristicas.map((c) => (
+              <li>{c}</li>
+            ))}
+          </ul>
+        )
+      }
+    </section>
+
+    {
+      data.galeria.length > 0 && (
+        <section class="page-shell gallery-section" aria-labelledby="galeria-titulo">
+          <h2 id="galeria-titulo">Galería</h2>
+          <ul class="gallery">
+            {data.galeria.map((item) => (
+              <li>
+                <Image src={item.imagen} alt={item.alt} width={480} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </article>
+</Base>
+
+<style>
+  .detail-hero {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: center;
+    gap: clamp(40px, 7vw, 100px);
+    padding: 50px 0 90px;
+  }
+
+  .text-link-back {
+    margin-bottom: 26px;
+  }
+
+  h1 {
+    margin-bottom: 14px;
+  }
+
+  .detail-tagline {
+    max-width: 520px;
+    margin-bottom: 34px;
+    color: var(--lilac);
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    line-height: 1.15;
+  }
+
+  .access-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .access-soon {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px 18px;
+    max-width: 520px;
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .inline-link {
+    color: var(--lilac);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+  }
+
+  .detail-frame {
+    overflow: hidden;
+    border: 3px solid var(--night);
+    border-radius: 24px;
+    box-shadow: 12px 12px 0 var(--leaf);
+    transform: rotate(2deg);
+  }
+
+  .detail-frame img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+
+  .detail-body {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: start;
+    gap: clamp(40px, 7vw, 100px);
+    padding: 40px 0 90px;
+  }
+
+  .prose {
+    max-width: 640px;
+    font-size: 1.12rem;
+  }
+
+  .prose :global(p) {
+    margin-bottom: 1.1em;
+  }
+
+  .prose :global(a) {
+    color: var(--lilac);
+    font-weight: 800;
+    text-decoration: underline;
+  }
+
+  .detail-body .feature-list {
+    grid-template-columns: 1fr;
+    margin: 0;
+  }
+
+  .gallery-section {
+    padding-bottom: 130px;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .gallery li {
+    overflow: hidden;
+    border: 2px solid var(--night);
+    border-radius: 18px;
+    background: var(--white);
+    box-shadow: 6px 6px 0 var(--night);
+  }
+
+  .gallery li:nth-child(3n + 2) {
+    box-shadow: 6px 6px 0 var(--lilac);
+  }
+
+  .gallery li:nth-child(3n + 3) {
+    box-shadow: 6px 6px 0 var(--leaf);
+  }
+
+  .gallery img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+
+  @media (max-width: 820px) {
+    .detail-hero,
+    .detail-body {
+      grid-template-columns: 1fr;
+    }
+
+    .detail-visual {
+      width: min(500px, 92%);
+      margin-inline: auto;
+    }
+  }
+
+  @media (max-width: 540px) {
+    .detail-hero {
+      padding: 30px 0 70px;
+    }
+
+    .gallery-section {
+      padding-bottom: 90px;
+    }
+  }
+</style>

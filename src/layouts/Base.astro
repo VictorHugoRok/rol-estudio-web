@@ -1,0 +1,61 @@
+---
+import { Font, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+import portadaPorDefecto from '../assets/malix/portada.jpg';
+import '../styles/global.css';
+
+interface Props {
+  /** Título de la pestaña. Si no se pasa, se usa el nombre del estudio. */
+  titulo?: string;
+  descripcion?: string;
+  /** Imagen para redes sociales (Open Graph). */
+  imagen?: ImageMetadata;
+}
+
+const { titulo, descripcion = site.descripcion, imagen = portadaPorDefecto } = Astro.props;
+
+const tituloCompleto = titulo ? `${titulo} — ${site.nombre}` : `${site.nombre} — Apps y juegos con historia`;
+const urlCanonica = new URL(Astro.url.pathname, Astro.site);
+const og = await getImage({ src: imagen, width: 1200, format: 'jpg' });
+const urlImagen = new URL(og.src, Astro.site);
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{tituloCompleto}</title>
+    <meta name="description" content={descripcion} />
+    <link rel="canonical" href={urlCanonica} />
+    <meta name="theme-color" content="#fff8e6" />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Redes sociales -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.nombre} />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:title" content={tituloCompleto} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:url" content={urlCanonica} />
+    <meta property="og:image" content={urlImagen} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <Font cssVariable="--font-schoolbell" preload />
+    <Font cssVariable="--font-nunito" preload />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <Header />
+    <main id="contenido">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,82 @@
+---
+import { site } from '../data/site';
+---
+
+<section class="page-shell section contact" id="contacto">
+  <div class="contact-box">
+    <h2>¿Quieres saber qué sigue?</h2>
+    <p>
+      Acompáñanos mientras construimos nuestros primeros mundos. Las buenas aventuras siempre
+      empiezan reuniendo al equipo.
+    </p>
+    <a class="button button-night" href={`mailto:${site.correo}`}>{site.correo}</a>
+  </div>
+</section>
+
+<style>
+  .contact {
+    text-align: center;
+  }
+
+  .contact-box {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(60px, 9vw, 100px) 25px;
+    border: 3px solid var(--night);
+    border-radius: 28px;
+    background: var(--sun);
+    box-shadow: 12px 12px 0 var(--lilac);
+  }
+
+  .contact-box::before,
+  .contact-box::after {
+    content: '✦';
+    position: absolute;
+    color: var(--lilac);
+    font-size: 6rem;
+    line-height: 1;
+  }
+
+  .contact-box::before {
+    left: 6%;
+    top: 15%;
+    transform: rotate(-12deg);
+  }
+
+  .contact-box::after {
+    right: 7%;
+    bottom: 10%;
+    color: var(--leaf);
+    font-size: 4rem;
+  }
+
+  .contact-box h2,
+  .contact-box p,
+  .contact-box .button {
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-box h2 {
+    max-width: 700px;
+    margin: 0 auto 20px;
+  }
+
+  .contact-box p {
+    max-width: 520px;
+    margin: 0 auto 34px;
+    font-size: 1.05rem;
+  }
+
+  @media (max-width: 540px) {
+    .contact-box::before,
+    .contact-box::after {
+      opacity: 0.18;
+    }
+
+    .contact-box .button {
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+  }
+</style>

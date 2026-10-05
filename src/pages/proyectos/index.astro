@@ -1,0 +1,55 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getProyectos } from '../../lib/proyectos';
+
+const proyectos = await getProyectos();
+---
+
+<Base titulo="Proyectos" descripcion="Las apps gamificadas y los juegos de Rol Estudio.">
+  <section class="page-shell listing">
+    <p class="eyebrow">Proyectos</p>
+    <h1>Lo que estamos <span>creando.</span></h1>
+    <p class="listing-lead">
+      Cada proyecto empieza como un boceto en una libreta. Aquí puedes ver en qué estamos
+      trabajando y entrar a los que ya están listos para jugarse.
+    </p>
+
+    <div class="cards">
+      {proyectos.map((proyecto) => <ProjectCard proyecto={proyecto} />)}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .listing {
+    padding: 70px 0 130px;
+  }
+
+  h1 {
+    max-width: 760px;
+  }
+
+  h1 span {
+    color: var(--lilac);
+  }
+
+  .listing-lead {
+    max-width: 600px;
+    margin-bottom: 60px;
+    color: var(--night-76);
+    font-size: 1.1rem;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 32px;
+  }
+
+  @media (max-width: 540px) {
+    .listing {
+      padding: 40px 0 90px;
+    }
+  }
+</style>

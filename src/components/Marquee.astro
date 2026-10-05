@@ -1,0 +1,46 @@
+---
+import { franja } from '../data/site';
+
+// Se repite la lista dos veces para que la animación sea continua.
+const items = [...franja, ...franja];
+---
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    {items.map((texto) => <span>{texto}</span>)}
+  </div>
+</div>
+
+<style>
+  .marquee {
+    overflow: hidden;
+    padding: 18px 0;
+    color: var(--cream);
+    background: var(--night);
+    transform: rotate(-1deg) scale(1.02);
+  }
+
+  .marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    width: max-content;
+    font-size: 0.9rem;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    animation: slide 26s linear infinite;
+  }
+
+  .marquee-track span::after {
+    content: '✦';
+    margin-left: 26px;
+    color: var(--sun);
+  }
+
+  @keyframes slide {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+</style>

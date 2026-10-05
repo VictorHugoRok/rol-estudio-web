@@ -1,0 +1,98 @@
+---
+import { valores } from '../data/site';
+---
+
+<section class="about section" id="estudio">
+  <div class="page-shell about-inner">
+    <div>
+      <p class="eyebrow">Quiénes somos</p>
+      <h2>Pequeños por elección. Grandes en imaginación.</h2>
+    </div>
+    <div>
+      <p class="about-copy">
+        Rol Estudio nació de una idea sencilla: hacer las apps y los juegos que nos gustaría
+        encontrar. Trabajamos con calma, curiosidad y <strong>mucho cariño por cada detalle.</strong>
+      </p>
+      <div class="values">
+        {
+          valores.map((valor) => (
+            <div class="value">
+              <b>{valor.titulo}</b>
+              <span>{valor.texto}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    color: var(--cream);
+    background: var(--forest);
+  }
+
+  .about-inner {
+    display: grid;
+    grid-template-columns: 0.75fr 1.25fr;
+    gap: 90px;
+    align-items: start;
+  }
+
+  .about .eyebrow {
+    color: var(--sun);
+  }
+
+  .about h2 {
+    margin: 0;
+  }
+
+  .about-copy {
+    font-size: clamp(1.25rem, 2vw, 1.6rem);
+    line-height: 1.45;
+  }
+
+  .about-copy strong {
+    color: var(--sun);
+  }
+
+  .values {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 38px;
+  }
+
+  .value {
+    padding-top: 17px;
+    border-top: 2px solid var(--cream-35);
+  }
+
+  .value b {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--sun);
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .value span {
+    color: var(--cream-75);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 820px) {
+    .about-inner {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+  }
+
+  @media (max-width: 540px) {
+    .values {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
