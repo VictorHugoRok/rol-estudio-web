@@ -3,9 +3,9 @@
 export const site = {
   nombre: 'Rol Estudio',
   descripcion:
-    'Rol Estudio — estudio indie de apps gamificadas y juegos con historia, hecho en México.',
+    'Rol Estudio — estudio indie de apps gamificadas y juegos con historia, orgullosamente hecho en México.',
   correo: 'hola@rolestudio.com',
-  lema: 'Haciendo mundos desde algún rincón de México.',
+  lema: 'Haciendo, desde algún rincón de Yucatán, México.',
 };
 
 export const navegacion = [
@@ -26,7 +26,8 @@ export const franja = [
   'Apps gamificadas',
   'Juegos con corazón',
   'Hecho en México',
-  'Mundos por descubrir',
+  'Cree en ti',
+  'Software para todos'
 ];
 
 export const servicios = [

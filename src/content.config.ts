@@ -14,9 +14,12 @@ const proyectos = defineCollection({
       // Una o dos líneas. Se usa en tarjetas y en la descripción para buscadores.
       resumen: z.string(),
       tipo: z.string(),
-      estado: z.enum(['En desarrollo', 'Beta', 'Disponible', 'Pausado']),
+      // Texto libre que se muestra como etiqueta: "En desarrollo", "APK disponible", etc.
+      estado: z.string(),
       portada: image(),
       portadaAlt: z.string(),
+      // true = muestra la portada entera, sin recortarla (útil para logos).
+      portadaCompleta: z.boolean().default(false),
       caracteristicas: z.array(z.string()).default([]),
       // Botones de acceso: la app web, tiendas, itch.io, etc.
       enlaces: z

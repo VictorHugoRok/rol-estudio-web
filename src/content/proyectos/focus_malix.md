@@ -1,16 +1,16 @@
 ---
-nombre: Malix
-titular: Una aventura está germinando.
-resumen: Acompaña a Malix en un viaje construido a mano, lleno de secretos, decisiones y criaturas inesperadas.
-tipo: Aventura narrativa
-estado: En desarrollo
+nombre: Focus malix
+titular: Concentrarse, un superpoder humano.
+resumen: Mantener la concentracion y enfocarse es una de las habilidades que todos tenemos, pero debe ser practicada constantemente.
+tipo: Productividad
+estado: Disponible (en aprobación) en la PlayStore
 portada: ../../assets/malix/portada.jpg
 portadaAlt: Ilustración de Malix, un perrito dibujado a mano, enroscado y dormido.
 caracteristicas:
-  - Aventura narrativa
-  - Mundo ilustrado
-  - Personajes únicos
-  - Muchos secretos
+  - Productividad
+  - Gamificacion
+  - Personaje malix
+  - Para todo público
 # Cuando el proyecto esté publicado, agrega aquí sus accesos. Ejemplo:
 # enlaces:
 #   - texto: Abrir la app
@@ -24,6 +24,6 @@ galeria:
 orden: 1
 ---
 
-Algo extraño despierta entre las hojas. Acompaña a Malix en un viaje construido a mano, lleno de secretos, decisiones y criaturas inesperadas.
+Algo 
 
 Malix es nuestro primer proyecto y también la mascota del estudio. Estamos dibujando su mundo trazo por trazo; aquí iremos contando cómo avanza.

@@ -19,7 +19,12 @@ const accesoPrincipal = data.enlaces[0];
 
 <article class:list={['project-grid', { invertido }]}>
   <div class="project-visual">
-    <a class="project-frame" href={urlDetalle} tabindex="-1" aria-hidden="true">
+    <a
+      class:list={['project-frame', { completa: data.portadaCompleta }]}
+      href={urlDetalle}
+      tabindex="-1"
+      aria-hidden="true"
+    >
       <Image src={data.portada} alt="" width={640} />
     </a>
     <span class="tag project-tag">{data.estado}</span>
@@ -90,6 +95,15 @@ const accesoPrincipal = data.enlaces[0];
     aspect-ratio: 1;
     object-fit: cover;
     transition: transform 400ms ease;
+  }
+
+  .project-frame.completa {
+    background: var(--white);
+  }
+
+  .project-frame.completa img {
+    padding: 12%;
+    object-fit: contain;
   }
 
   .project-frame:hover img {

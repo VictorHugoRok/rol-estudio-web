@@ -11,7 +11,7 @@ const { data, id } = Astro.props.proyecto;
 ---
 
 <article class="card">
-  <div class="card-media">
+  <div class:list={['card-media', { completa: data.portadaCompleta }]}>
     <Image src={data.portada} alt="" width={560} />
     <span class="tag card-tag">{data.estado}</span>
   </div>
@@ -53,6 +53,12 @@ const { data, id } = Astro.props.proyecto;
     width: 100%;
     aspect-ratio: 4 / 3;
     object-fit: cover;
+  }
+
+  /* Deja aire arriba para que la etiqueta de estado no tape la portada. */
+  .card-media.completa img {
+    padding: 56px 36px 28px;
+    object-fit: contain;
   }
 
   .card-tag {

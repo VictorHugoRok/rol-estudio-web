@@ -64,7 +64,7 @@ const { Content } = await render(proyecto);
       </div>
 
       <div class="detail-visual">
-        <div class="detail-frame">
+        <div class:list={['detail-frame', { completa: data.portadaCompleta }]}>
           <Image src={data.portada} alt={data.portadaAlt} width={720} loading="eager" />
         </div>
       </div>
@@ -164,6 +164,15 @@ const { Content } = await render(proyecto);
     width: 100%;
     aspect-ratio: 1;
     object-fit: cover;
+  }
+
+  .detail-frame.completa {
+    background: var(--white);
+  }
+
+  .detail-frame.completa img {
+    padding: 12%;
+    object-fit: contain;
   }
 
   .detail-body {
