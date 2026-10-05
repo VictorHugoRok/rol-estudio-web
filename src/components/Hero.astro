@@ -1,15 +1,31 @@
 ---
 import { Image } from 'astro:assets';
-import icono from '../assets/malix/icono.png';
+import manga from '../assets/malix/malix_icono_manga.png';
+import pintura from '../assets/malix/malix_icono_pintura.png';
+import pixelart from '../assets/malix/malix_icono_pixelart.png';
+import silueta from '../assets/malix/malix_icono_silueta.png';
+import silueta2 from '../assets/malix/malix_icono_silueta2.png';
+
+// Malix va cambiando de estilo cada 3 segundos 
+const iconos = [
+  { src: pintura },
+  { src: manga },
+  { src: silueta },
+  // Mide 64 px: se escala en CSS sin suavizado y se deja en PNG para que
+  // los píxeles queden nítidos.
+  { src: pixelart, pixelado: true },
+  { src: silueta2 },
+];
 ---
 
 <section class="page-shell hero" id="inicio">
   <div class="hero-copy">
-    <p class="eyebrow">Un pequeño estudio indie</p>
-    <h1>Creamos mundos para <span>perderse.</span></h1>
+    <h1>Creemos en seguir<span>aprendiendo.</span></h1>
     <p class="hero-lead">
-      Somos Rol Estudio. Diseñamos apps gamificadas y juegos con identidad, personajes
-      inolvidables y esas historias que se quedan contigo mucho después de apagar la pantalla.
+      Porque creo significa crear y creer, y para crear hay que creer.
+
+— IDOR
+
     </p>
     <div class="hero-actions">
       <a class="button button-primary" href="/proyectos/">Descubre nuestros proyectos</a>
@@ -21,13 +37,25 @@ import icono from '../assets/malix/icono.png';
     <span class="spark spark-one" aria-hidden="true">✦</span>
     <span class="spark spark-two" aria-hidden="true">✷</span>
     <div class="blob" aria-hidden="true"></div>
-    <Image
-      src={icono}
-      alt="Malix, la mascota de Rol Estudio: un perrito dibujado a mano, enroscado y dormido."
-      width={420}
-      loading="eager"
-      fetchpriority="high"
-    />
+    <div
+      class="malix"
+      role="img"
+      aria-label="Malix, la mascota de Rol Estudio: un perrito enroscado y dormido."
+    >
+      {
+        iconos.map(({ src, pixelado }, i) => (
+          <Image
+            src={src}
+            alt=""
+            width={pixelado ? undefined : 420}
+            format={pixelado ? 'png' : undefined}
+            class:list={[{ 'is-active': i === 0, 'is-pixelado': pixelado }]}
+            loading={i === 0 ? 'eager' : 'lazy'}
+            fetchpriority={i === 0 ? 'high' : undefined}
+          />
+        ))
+      }
+    </div>
     <p class="art-note">¡Hola! Soy Malix, tu guía por aquí.</p>
   </div>
 </section>
@@ -100,12 +128,30 @@ import icono from '../assets/malix/icono.png';
     transform: rotate(-4deg);
   }
 
-  .hero-art img {
+  /* Los dibujos se apilan en la misma celda y solo el activo es visible. */
+  .malix {
     position: relative;
     z-index: 2;
+    display: grid;
     width: min(420px, 86%);
     filter: drop-shadow(0 18px 12px var(--night-18));
     animation: float 4s ease-in-out infinite;
+  }
+
+  .malix img {
+    grid-area: 1 / 1;
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .malix img.is-active {
+    opacity: 1;
+  }
+
+  .malix img.is-pixelado {
+    image-rendering: pixelated;
   }
 
   .art-note {
@@ -198,3 +244,44 @@ import icono from '../assets/malix/icono.png';
     }
   }
 </style>
+
+<script>
+  // Cambia el dibujo de Malix cada 3 segundos, en bucle. Si la persona
+  // prefiere menos movimiento, Malix se queda quieto.
+  const INTERVALO = 3000;
+  const iconos = document.querySelectorAll<HTMLImageElement>('.malix img');
+  const menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  let actual = 0;
+  let temporizador: number | undefined;
+
+  const avanzar = () => {
+    for (let paso = 1; paso < iconos.length; paso++) {
+      const siguiente = (actual + paso) % iconos.length;
+      const icono = iconos[siguiente];
+      // Si aún no termina de cargar, se espera al próximo turno.
+      if (!icono.complete) return;
+      // Si no se pudo cargar (404, sin red), se salta para no mostrar una imagen rota.
+      if (icono.naturalWidth === 0) continue;
+      iconos[actual].classList.remove('is-active');
+      icono.classList.add('is-active');
+      actual = siguiente;
+      return;
+    }
+  };
+
+  // Solo rota con la pestaña visible y sin preferencia de menos movimiento.
+  const actualizar = () => {
+    window.clearInterval(temporizador);
+    temporizador = undefined;
+    if (!menosMovimiento.matches && !document.hidden) {
+      temporizador = window.setInterval(avanzar, INTERVALO);
+    }
+  };
+
+  if (iconos.length > 1) {
+    actualizar();
+    menosMovimiento.addEventListener('change', actualizar);
+    document.addEventListener('visibilitychange', actualizar);
+  }
+</script>

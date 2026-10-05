@@ -21,10 +21,6 @@ enlaces: []
 galeria:
   - imagen: ../../assets/malix/durmiendo.png
     alt: Boceto de Malix durmiendo enroscado.
-  - imagen: ../../assets/malix/sentado.png
-    alt: Boceto de Malix sentado, mirando a la izquierda.
-  - imagen: ../../assets/malix/mirando.png
-    alt: Boceto de Malix sentado con la cola estirada.
 orden: 1
 ---
 
