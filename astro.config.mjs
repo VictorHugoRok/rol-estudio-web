@@ -4,9 +4,11 @@ import sitemap from '@astrojs/sitemap';
 
 // https://docs.astro.build/en/reference/configuration-reference/
 export default defineConfig({
-  // Cambia esto por tu dominio real cuando lo tengas.
-  // Se usa para el sitemap y las URLs absolutas de las imágenes para redes.
-  site: 'https://rolestudio.com',
+  // Netlify define URL en cada build con la dirección principal del sitio
+  // (*.netlify.app, o tu dominio propio cuando lo conectes). Se usa para el
+  // sitemap, robots.txt y las URLs absolutas de las imágenes para redes.
+  // En local queda vacío y esas partes simplemente se omiten.
+  site: process.env.URL,
 
   integrations: [sitemap()],
 

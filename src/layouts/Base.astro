@@ -18,9 +18,11 @@ interface Props {
 const { titulo, descripcion = site.descripcion, imagen = portadaPorDefecto } = Astro.props;
 
 const tituloCompleto = titulo ? `${titulo} — ${site.nombre}` : `${site.nombre} — Apps y juegos con historia`;
-const urlCanonica = new URL(Astro.url.pathname, Astro.site);
-const og = await getImage({ src: imagen, width: 1200, format: 'jpg' });
-const urlImagen = new URL(og.src, Astro.site);
+// Sin `site` en astro.config.mjs no hay dominio para armar URLs absolutas, así
+// que se omiten la canónica, el sitemap y las etiquetas de redes que las usan.
+const dominio = Astro.site;
+const urlCanonica = dominio && new URL(Astro.url.pathname, dominio);
+const urlImagen = dominio && new URL((await getImage({ src: imagen, width: 1200, format: 'jpg' })).src, dominio);
 ---
 
 <!doctype html>
@@ -30,12 +32,12 @@ const urlImagen = new URL(og.src, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{tituloCompleto}</title>
     <meta name="description" content={descripcion} />
-    <link rel="canonical" href={urlCanonica} />
+    {urlCanonica && <link rel="canonical" href={urlCanonica} />}
     <meta name="theme-color" content="#fff8e6" />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    {dominio && <link rel="sitemap" href="/sitemap-index.xml" />}
 
     <!-- Redes sociales -->
     <meta property="og:type" content="website" />
@@ -43,8 +45,8 @@ const urlImagen = new URL(og.src, Astro.site);
     <meta property="og:locale" content="es_MX" />
     <meta property="og:title" content={tituloCompleto} />
     <meta property="og:description" content={descripcion} />
-    <meta property="og:url" content={urlCanonica} />
-    <meta property="og:image" content={urlImagen} />
+    {urlCanonica && <meta property="og:url" content={urlCanonica} />}
+    {urlImagen && <meta property="og:image" content={urlImagen} />}
     <meta name="twitter:card" content="summary_large_image" />
 
     <Font cssVariable="--font-schoolbell" preload />

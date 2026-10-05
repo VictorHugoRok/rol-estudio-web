@@ -74,7 +74,7 @@ Si un campo está mal (por ejemplo, un `estado` que no existe o una URL inválid
 
 ## Publicar
 
-Antes de publicar, cambia `site` en `astro.config.mjs` (y la línea `Sitemap:` de `public/robots.txt`) por tu dominio real.
+El sitio se publica en Netlify con la configuración de `netlify.toml`. `site` en `astro.config.mjs` toma la dirección del sitio de la variable `URL` que Netlify define en cada build, así que al conectar un dominio propio en Netlify el sitemap, `robots.txt` y las etiquetas para redes lo usan solos. En local (o en otro hosting sin esa variable) se construye igual, pero sin sitemap ni URLs absolutas; para tenerlas, define `URL` con tu dominio al construir.
 
 Cualquier hosting de sitios estáticos sirve. Configuración:
 

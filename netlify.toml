@@ -1,0 +1,8 @@
+# Despliegue en Netlify. La página 404 personalizada (dist/404.html) la usa
+# Netlify sin configuración extra.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"
