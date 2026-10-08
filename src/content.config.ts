@@ -38,6 +38,8 @@ const proyectos = defineCollection({
           }),
         )
         .default([]),
+      // true = muestra las imágenes de la galería enteras, sin recortarlas (útil para capturas de pantalla).
+      galeriaCompleta: z.boolean().default(false),
       // Menor número = aparece primero.
       orden: z.number().default(100),
       // true = no se publica (útil para preparar un proyecto antes de anunciarlo).

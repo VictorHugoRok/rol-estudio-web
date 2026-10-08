@@ -90,9 +90,9 @@ const { Content } = await render(proyecto);
       data.galeria.length > 0 && (
         <section class="page-shell gallery-section" aria-labelledby="galeria-titulo">
           <h2 id="galeria-titulo">Galería</h2>
-          <ul class="gallery">
+          <ul class:list={['gallery', { completa: data.galeriaCompleta }]}>
             {data.galeria.map((item) => (
-              <li>
+              <li style={`--proporcion: ${item.imagen.width / item.imagen.height}`}>
                 <Image src={item.imagen} alt={item.alt} width={480} />
               </li>
             ))}
@@ -236,6 +236,30 @@ const { Content } = await render(proyecto);
     width: 100%;
     aspect-ratio: 1;
     object-fit: cover;
+  }
+
+  /* Galería completa: filas justificadas. Cada imagen conserva su proporción
+     y las de una misma fila quedan del mismo alto. Con 180px de alto base
+     caben tres capturas horizontales por fila en escritorio y dos en tableta. */
+  .gallery.completa {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .gallery.completa li {
+    /* El borde no cuenta en el cálculo, así cuadran las alturas exactas. */
+    box-sizing: content-box;
+    flex: var(--proporcion) 1 calc(var(--proporcion) * 180px);
+  }
+
+  /* Relleno invisible: la última fila no se estira a todo lo ancho. */
+  .gallery.completa::after {
+    content: '';
+    flex-grow: 1000;
+  }
+
+  .gallery.completa img {
+    aspect-ratio: auto;
   }
 
   @media (max-width: 820px) {

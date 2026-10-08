@@ -24,6 +24,3 @@ galeria:
 orden: 1
 ---
 
-Algo 
-
-Malix es nuestro primer proyecto y también la mascota del estudio. Estamos dibujando su mundo trazo por trazo; aquí iremos contando cómo avanza.
