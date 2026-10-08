@@ -49,7 +49,7 @@ export const servicios = [
 ];
 
 export const valores = [
-  { titulo: '01 · Jugamos', texto: 'Probamos, fallamos y volvemos a intentar.' },
-  { titulo: '02 · Creamos', texto: 'Crear, explorar, expandir, conquistar' },
+  { titulo: '01 · Aprendemos', texto: 'Probamos, fallamos y volvemos a intentar.' },
+  { titulo: '02 · Equipo', texto: 'Todos tenemos talento en algo, podemos encontrarlo con la compañia correcta' },
   { titulo: '03 · Cuidamos', texto: 'La intención vive en los detalles.' },
 ];
