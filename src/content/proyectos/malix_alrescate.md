@@ -18,7 +18,9 @@ caracteristicas:
 #     url: https://malix.rolestudio.com
 #   - texto: Google Play
 #     url: https://play.google.com/store/apps/details?id=com.rolestudio.malix
-enlaces: []
+enlaces: 
+  - texto: Descargar APK
+    url: https://malix_alrescate.com
 galeria:
   - imagen: ../../assets/malix_alrescate/Malix1.png
     alt: Inicio

@@ -2,8 +2,7 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-// Cada archivo .md dentro de src/content/proyectos/ es un proyecto.
-// El nombre del archivo se usa como URL: malix.md → /proyectos/malix/
+
 const proyectos = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/proyectos' }),
   schema: ({ image }) =>

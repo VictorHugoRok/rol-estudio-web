@@ -3,8 +3,8 @@
 export const site = {
   nombre: 'Rol Estudio',
   descripcion:
-    'Rol Estudio — estudio indie de apps gamificadas y juegos con historia, orgullosamente hecho en México.',
-  correo: 'hola@rolestudio.com',
+    'Rol Estudio — estudio indie de apps gamificadas y algunos videojuegos dibujados a mano, orgullosamente hecho en México.',
+  correo: 'rolestudio.mid@gmail.com',
   lema: 'Haciendo, desde algún rincón de Yucatán, México.',
 };
 
@@ -14,7 +14,7 @@ export const navegacion = [
   { texto: 'El estudio', href: '/#estudio' },
 ];
 
-// Deja la URL vacía ('') para ocultar una red que todavía no tengan.
+
 export const redes = [
   { nombre: 'Instagram', url: '' },
   { nombre: 'TikTok', url: '' },
@@ -44,12 +44,12 @@ export const servicios = [
   {
     titulo: 'Personajes y mundos',
     texto:
-      'Ilustración, narrativa y diseño de personajes hechos a mano, como Malix, nuestra mascota.',
+      'Ilustración, narrativa y diseño de personajes hechos con entuciasmo, a crear al nuevo, original, nuestro.',
   },
 ];
 
 export const valores = [
   { titulo: '01 · Jugamos', texto: 'Probamos, fallamos y volvemos a intentar.' },
-  { titulo: '02 · Contamos', texto: 'Cada mecánica también dice algo.' },
+  { titulo: '02 · Creamos', texto: 'Crear, explorar, expandir, conquistar' },
   { titulo: '03 · Cuidamos', texto: 'La intención vive en los detalles.' },
 ];

@@ -17,7 +17,9 @@ caracteristicas:
 #     url: https://malix.rolestudio.com
 #   - texto: Google Play
 #     url: https://play.google.com/store/apps/details?id=com.rolestudio.malix
-enlaces: []
+enlaces: 
+  - texto: Descargar APK
+    url: https://malix_alrescate.com
 galeria:
   - imagen: ../../assets/myjournal/journal1.jpeg
     alt: Pantalla de inicio con la fecha del día, el botón para agregar una página y la lista de páginas recientes.
@@ -44,4 +46,4 @@ galeria:
 galeriaCompleta: true
 orden: 1
 ---
-
+MyJournal nace como un necesidad nuestra: aplicaciones de notas que no nos llenaban, de paga, sin atractivo para nosotros. Es por ello que, para nosotros como futuros ingenieros, si no existe, hazlo; y, como decía una gran persona: si puedes imaginarlo, puedes programarlo.

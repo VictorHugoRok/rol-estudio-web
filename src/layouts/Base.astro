@@ -8,7 +8,6 @@ import portadaPorDefecto from '../assets/malix/portada.jpg';
 import '../styles/global.css';
 
 interface Props {
-  /** Título de la pestaña. Si no se pasa, se usa el nombre del estudio. */
   titulo?: string;
   descripcion?: string;
   /** Imagen para redes sociales (Open Graph). */
@@ -18,8 +17,6 @@ interface Props {
 const { titulo, descripcion = site.descripcion, imagen = portadaPorDefecto } = Astro.props;
 
 const tituloCompleto = titulo ? `${titulo} — ${site.nombre}` : `${site.nombre} — Apps y juegos con historia`;
-// Sin `site` en astro.config.mjs no hay dominio para armar URLs absolutas, así
-// que se omiten la canónica, el sitemap y las etiquetas de redes que las usan.
 const dominio = Astro.site;
 const urlCanonica = dominio && new URL(Astro.url.pathname, dominio);
 const urlImagen = dominio && new URL((await getImage({ src: imagen, width: 1200, format: 'jpg' })).src, dominio);

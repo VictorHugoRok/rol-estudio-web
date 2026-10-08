@@ -1,11 +1,11 @@
 ---
 nombre: Focus malix
 titular: Concentrarse, un superpoder humano.
-resumen: Mantener la concentracion y enfocarse es una de las habilidades que todos tenemos, pero debe ser practicada constantemente.
+resumen: Mantener la concentracion y enfocarse es una de las habilidades que todos tenemos, pero debe ser practicada constantemente. En esta ocación no solo buscamos eso, concentrar, sino todo lo demás, 
 tipo: Productividad
 estado: Disponible (en aprobación) en la PlayStore
-portada: ../../assets/malix/portada.jpg
-portadaAlt: Ilustración de Malix, un perrito dibujado a mano, enroscado y dormido.
+portada: ../../assets/focus_malix/Logo.jpeg
+portadaAlt: Logo oficial de app focus malix
 caracteristicas:
   - Productividad
   - Gamificacion
@@ -17,10 +17,27 @@ caracteristicas:
 #     url: https://malix.rolestudio.com
 #   - texto: Google Play
 #     url: https://play.google.com/store/apps/details?id=com.rolestudio.malix
-enlaces: []
+enlaces: 
+  - texto: Descargar APK
+    url: https://malix_alrescate.com
 galeria:
-  - imagen: ../../assets/malix/durmiendo.png
-    alt: Boceto de Malix durmiendo enroscado.
+  - imagen: ../../assets/focus_malix/focus1.jpeg
+    alt: Inicio
+  - imagen: ../../assets/focus_malix/focus2.jpeg
+    alt: Imagen17
+  - imagen: ../../assets/focus_malix/focus3.jpeg
+    alt: Imagen2
+  - imagen: ../../assets/focus_malix/focus4.jpeg
+    alt: Imagen3
+  - imagen: ../../assets/focus_malix/focus5.jpeg
+    alt: Imagen4
+  - imagen: ../../assets/focus_malix/focus6.jpeg
+    alt: Imagen5
+  - imagen: ../../assets/focus_malix/focus7.jpeg
+    alt: Imagen6
+  - imagen: ../../assets/focus_malix/focus8.jpeg
+    alt: Imagen7
 orden: 1
 ---
 
+EL tiempo en pantalla es uno de nuestros mayores enemigos para crear y estudiar (puedes verlo tu mismo en tu movil), por lo que deberiamos preocuparnos más por esa cifra. Entonces, ahora necesitamos un poco de liberacion dejando el movil por un rato. Asi podemos trabajar sin la mayor distracción. A veces el enemigo vive con nosotros. Focus malix te acompaña a deshacer esa distracción por un momento.
