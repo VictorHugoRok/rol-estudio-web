@@ -4,7 +4,7 @@ titular: Apunta a la vida
 resumen: Aplicacion para notas escolares, recordatorios, creacion de habitos y guradar recuerdos en un solo lugar.
 tipo: Productividad
 estado: Disponible en apk
-portada: ../../assets/focus_malix/Logo.jpeg
+portada: ../../assets/myjournal/Logo.png
 portadaAlt: Logo de Journal
 caracteristicas:
   - Productividad
