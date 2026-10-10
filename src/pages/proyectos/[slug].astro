@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import { render, type CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { getProyectos } from '../../lib/proyectos';
@@ -20,6 +20,24 @@ interface Props {
 const { proyecto } = Astro.props;
 const { data } = proyecto;
 const { Content } = await render(proyecto);
+
+// Versión grande de cada imagen de la galería: es la que se abre al ampliarla.
+// Nunca se agranda más allá del tamaño original.
+const ANCHO_AMPLIADA = 1600;
+const galeria = await Promise.all(
+  data.galeria.map(async (item) => {
+    const ancho = Math.min(item.imagen.width, ANCHO_AMPLIADA);
+    const ampliada = await getImage({ src: item.imagen, width: ancho });
+    return {
+      ...item,
+      ampliada: {
+        src: ampliada.src,
+        ancho,
+        alto: Math.round((ancho * item.imagen.height) / item.imagen.width),
+      },
+    };
+  }),
+);
 ---
 
 <Base titulo={data.nombre} descripcion={data.resumen} imagen={data.portada}>
@@ -87,16 +105,30 @@ const { Content } = await render(proyecto);
     </section>
 
     {
-      data.galeria.length > 0 && (
+      galeria.length > 0 && (
         <section class="page-shell gallery-section" aria-labelledby="galeria-titulo">
           <h2 id="galeria-titulo">Galería</h2>
           <ul class:list={['gallery', { completa: data.galeriaCompleta }]}>
-            {data.galeria.map((item) => (
+            {galeria.map((item) => (
               <li style={`--proporcion: ${item.imagen.width / item.imagen.height}`}>
-                <Image src={item.imagen} alt={item.alt} width={480} />
+                {/* Sin JavaScript, el enlace abre la imagen grande en la misma pestaña. */}
+                <a
+                  class="gallery-zoom"
+                  href={item.ampliada.src}
+                  aria-label={`Ampliar imagen: ${item.alt}`}
+                  data-ancho={item.ampliada.ancho}
+                  data-alto={item.ampliada.alto}
+                >
+                  <Image src={item.imagen} alt={item.alt} width={480} />
+                </a>
               </li>
             ))}
           </ul>
+
+          <dialog class="lightbox" aria-label="Imagen ampliada">
+            <button class="button button-sun lightbox-close" type="button">Cerrar</button>
+            <img class="lightbox-image" alt="" />
+          </dialog>
         </section>
       )
     }
@@ -238,6 +270,80 @@ const { Content } = await render(proyecto);
     object-fit: cover;
   }
 
+  .gallery-zoom {
+    display: block;
+    cursor: zoom-in;
+  }
+
+  /* El <li> recorta lo que sobresale, así que el foco se dibuja en él. */
+  .gallery li:has(.gallery-zoom:focus-visible) {
+    outline: 3px solid var(--lilac);
+    outline-offset: 3px;
+  }
+
+  /* Vista ampliada: ocupa toda la pantalla y se cierra con un clic o con Escape. */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: color-mix(in srgb, var(--night) 92%, transparent);
+    cursor: zoom-out;
+  }
+
+  .lightbox[open] {
+    display: grid;
+    place-items: center;
+    animation: lightbox-in 180ms ease;
+  }
+
+  .lightbox::backdrop {
+    background: transparent;
+  }
+
+  /* Lo más grande que quepa en la pantalla, sin deformarse ni pasar de su
+     tamaño real. El hueco queda reservado antes de que cargue la imagen. */
+  .lightbox-image {
+    box-sizing: content-box;
+    width: min(var(--ancho), 100vw - 38px, (100dvh - 38px) * var(--proporcion));
+    aspect-ratio: var(--proporcion);
+    border: 3px solid var(--cream);
+    border-radius: 18px;
+    background: var(--white);
+  }
+
+  .lightbox-close {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 1;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--night);
+  }
+
+  /* Lila sobre noche casi no se ve: aquí el foco va en sol. */
+  .lightbox-close:focus-visible {
+    outline-color: var(--sun);
+  }
+
+  /* Mientras la vista ampliada está abierta, la página de fondo no se desplaza. */
+  :global(html:has(.lightbox[open])) {
+    overflow: hidden;
+  }
+
+  @keyframes lightbox-in {
+    from {
+      opacity: 0;
+    }
+  }
+
   /* Galería completa: filas justificadas. Cada imagen conserva su proporción
      y las de una misma fila quedan del mismo alto. Con 180px de alto base
      caben tres capturas horizontales por fila en escritorio y dos en tableta. */
@@ -284,3 +390,35 @@ const { Content } = await render(proyecto);
     }
   }
 </style>
+
+<script>
+  // Al hacer clic en una imagen de la galería se abre ampliada, entera y sin
+  // recortes. <dialog> ya se encarga de Escape, de atrapar el foco y de
+  // devolverlo a la miniatura al cerrar.
+  const dialogo = document.querySelector<HTMLDialogElement>('.lightbox');
+  const ampliada = dialogo?.querySelector<HTMLImageElement>('.lightbox-image');
+
+  if (dialogo && ampliada) {
+    document.querySelectorAll<HTMLAnchorElement>('.gallery-zoom').forEach((enlace) => {
+      enlace.addEventListener('click', (evento) => {
+        // Con Ctrl, Cmd o Shift se respeta "abrir en otra pestaña o ventana".
+        if (evento.metaKey || evento.ctrlKey || evento.shiftKey || evento.altKey) return;
+        evento.preventDefault();
+
+        const ancho = Number(enlace.dataset.ancho);
+        const alto = Number(enlace.dataset.alto);
+        ampliada.style.setProperty('--ancho', `${ancho}px`);
+        ampliada.style.setProperty('--proporcion', String(ancho / alto));
+        ampliada.alt = enlace.querySelector('img')?.alt ?? '';
+        ampliada.src = enlace.href;
+        dialogo.showModal();
+      });
+    });
+
+    // Un clic en cualquier parte (fondo, imagen o botón) cierra la vista.
+    dialogo.addEventListener('click', () => dialogo.close());
+
+    // Se vacía para que la próxima vez no asome la imagen anterior.
+    dialogo.addEventListener('close', () => ampliada.removeAttribute('src'));
+  }
+</script>

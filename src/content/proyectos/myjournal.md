@@ -19,7 +19,7 @@ caracteristicas:
 #     url: https://play.google.com/store/apps/details?id=com.rolestudio.malix
 enlaces: 
   - texto: Descargar APK
-    url: https://malix_alrescate.com
+    url: https://drive.google.com/drive/folders/1myQqiicwskhhIDSV6gd50NJ37Nze0Gsw
 galeria:
   - imagen: ../../assets/myjournal/journal1.jpeg
     alt: Pantalla de inicio con la fecha del día, el botón para agregar una página y la lista de páginas recientes.
