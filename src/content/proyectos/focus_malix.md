@@ -1,14 +1,14 @@
 ---
 nombre: Focus malix
 titular: Concentrarse, un superpoder humano.
-resumen: Mantener la concentracion y enfocarse es una de las habilidades que todos tenemos, pero debe ser practicada constantemente. En esta ocación no solo buscamos eso, concentrar, sino todo lo demás, 
+resumen: Mantener la concentración y enfocarse es una de las habilidades que todos tenemos, pero debe ser practicada constantemente. En esta ocasión no solo buscamos eso, concentrar, sino todo lo demás.
 tipo: Productividad
 estado: Disponible (en aprobación) en la PlayStore
 portada: ../../assets/focus_malix/Logo.jpeg
-portadaAlt: Logo oficial de app focus malix
+portadaAlt: Logo oficial de app Focus malix
 caracteristicas:
   - Productividad
-  - Gamificacion
+  - Gamificación
   - Personaje malix
   - Para todo público
 # Cuando el proyecto esté publicado, agrega aquí sus accesos. Ejemplo:
@@ -40,4 +40,4 @@ galeria:
 orden: 1
 ---
 
-EL tiempo en pantalla es uno de nuestros mayores enemigos para crear y estudiar (puedes verlo tu mismo en tu movil), por lo que deberiamos preocuparnos más por esa cifra. Entonces, ahora necesitamos un poco de liberacion dejando el movil por un rato. Asi podemos trabajar sin la mayor distracción. A veces el enemigo vive con nosotros. Focus malix te acompaña a deshacer esa distracción por un momento.
+El tiempo en pantalla es uno de nuestros mayores enemigos para crear y estudiar (puedes verlo tú mismo en tu móvil), por lo que deberíamos preocuparnos más por esa cifra. Entonces, ahora necesitamos un poco de liberación dejando el móvil por un rato. Así podemos trabajar sin la mayor distracción. A veces el enemigo vive con nosotros. Focus malix te acompaña a deshacer esa distracción por un momento.

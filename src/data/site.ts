@@ -44,12 +44,12 @@ export const servicios = [
   {
     titulo: 'Personajes y mundos',
     texto:
-      'Ilustración, narrativa y diseño de personajes hechos con entuciasmo, a crear al nuevo, original, nuestro.',
+      'Ilustración, narrativa y diseño de personajes hechos con entusiasmo, para crear algo nuevo, original, nuestro.',
   },
 ];
 
 export const valores = [
   { titulo: '01 · Aprendemos', texto: 'Probamos, fallamos y volvemos a intentar.' },
-  { titulo: '02 · Equipo', texto: 'Todos tenemos talento en algo, podemos encontrarlo con la compañia correcta' },
+  { titulo: '02 · Equipo', texto: 'Todos tenemos talento en algo, podemos encontrarlo con la compañía correcta.' },
   { titulo: '03 · Cuidamos', texto: 'La intención vive en los detalles.' },
 ];

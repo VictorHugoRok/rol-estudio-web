@@ -1,9 +1,9 @@
 ---
 nombre: myjournal
 titular: Apunta a la vida
-resumen: Aplicacion para notas escolares, recordatorios, creacion de habitos y guradar recuerdos en un solo lugar.
+resumen: Aplicación para notas escolares, recordatorios, creación de hábitos y guardar recuerdos en un solo lugar.
 tipo: Productividad
-estado: Disponible en apk
+estado: Disponible en APK
 portada: ../../assets/myjournal/Logo.png
 portadaAlt: Logo de Journal
 caracteristicas:
@@ -46,4 +46,4 @@ galeria:
 galeriaCompleta: true
 orden: 1
 ---
-MyJournal nace como un necesidad nuestra: aplicaciones de notas que no nos llenaban, de paga, sin atractivo para nosotros. Es por ello que, para nosotros como futuros ingenieros, si no existe, hazlo; y, como decía una gran persona: si puedes imaginarlo, puedes programarlo.
+MyJournal nace como una necesidad nuestra: aplicaciones de notas que no nos llenaban, de paga, sin atractivo para nosotros. Es por ello que, para nosotros como futuros ingenieros, si no existe, hazlo; y, como decía una gran persona: si puedes imaginarlo, puedes programarlo.
