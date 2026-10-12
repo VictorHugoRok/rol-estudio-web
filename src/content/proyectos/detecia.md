@@ -1,7 +1,8 @@
 ---
 nombre: DetecIA
-titular: No todo lo que dice una IA es verdad. ¿Puedes detectarlo?
-resumen: Una historia corta e interactiva en la que niñas y niños aprenden a detectar la información falsa o sin verificar que puede darles una inteligencia artificial, y a no dejar que decida por ellos. Siempre con un adulto cerca.
+titular: No todo lo que br**IA** es oro.
+resumen: Nada extraordinario llega a la vida de los mortales separado de la desgracia. -Sófocles. 
+ Una historia corta e interactiva en la que niñas y niños aprenden a detectar la información falsa o sin verificar que puede darles una inteligencia artificial, y a no dejar que decida por ellos. Siempre con un adulto cerca.
 tipo: Educación digital
 estado: En desarrollo
 portada: ../../assets/detecia/portada.png
