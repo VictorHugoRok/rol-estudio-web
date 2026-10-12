@@ -2,6 +2,7 @@
 // Proyecto en formato grande (imagen + texto). Se usa en la página de inicio.
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import Titular from './Titular.astro';
 
 interface Props {
   proyecto: CollectionEntry<'proyectos'>;
@@ -33,7 +34,7 @@ const accesoPrincipal = data.enlaces[0];
   <div class="project-copy">
     <p class="eyebrow">{antetitulo ?? data.tipo}</p>
     <h2>
-      <a href={urlDetalle}>{data.titular}</a>
+      <a href={urlDetalle}><Titular texto={data.titular} /></a>
     </h2>
     <p class="project-summary">{data.resumen}</p>
 

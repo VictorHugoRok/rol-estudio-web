@@ -8,7 +8,8 @@ const proyectos = defineCollection({
   schema: ({ image }) =>
     z.object({
       nombre: z.string(),
-      // Frase grande que aparece como título del proyecto.
+      // Frase grande que aparece como título del proyecto. Lo que vaya entre
+      // dobles asteriscos (**así**) se resalta en dorado.
       titular: z.string(),
       // Una o dos líneas. Se usa en tarjetas y en la descripción para buscadores.
       resumen: z.string(),

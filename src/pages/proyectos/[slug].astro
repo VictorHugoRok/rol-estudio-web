@@ -2,6 +2,7 @@
 import { Image, getImage } from 'astro:assets';
 import { render, type CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import Titular from '../../components/Titular.astro';
 import { getProyectos } from '../../lib/proyectos';
 
 // Genera una página por cada proyecto de src/content/proyectos/
@@ -47,7 +48,7 @@ const galeria = await Promise.all(
         <a class="text-link text-link-back" href="/proyectos/">Todos los proyectos</a>
         <p class="eyebrow">{data.tipo}</p>
         <h1>{data.nombre}</h1>
-        <p class="detail-tagline">{data.titular}</p>
+        <p class="detail-tagline"><Titular texto={data.titular} /></p>
 
         <div class="access" aria-labelledby="acceso-titulo">
           <h2 id="acceso-titulo" class="visually-hidden">Acceso</h2>
